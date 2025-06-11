@@ -18,21 +18,7 @@ services:
       - "/dev/net/tun"
     networks: 
       ueransim_vlan:
-        
-    environment:
-      - MCC=${MCC}
-      - MNC=${MNC}
-      - UE_KEY=${UE_KEY}
-      - UE_OP=${UE_OP}
-      - UE_AMF_AUTH=${UE_AMF_AUTH}
-      - UE_IMEI=${UE_IMEI}
-      - UE_IMSI=${UE_IMSI}
-      - UE_DNN_NAME=${UE_DNN_NAME}
-      - GNB_AMF_IP=${GNB_AMF_IP}
-      - TAC=${TAC}
-      - NSSAI_SST=${NSSAI_SST}
-      - NSSAI_SD=${NSSAI_SD}
-      - APN_NAME=${APN_NAME}
+    env_file: ".env"
   
 networks:
   ueransim_vlan:
