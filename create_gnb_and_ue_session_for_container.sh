@@ -9,7 +9,7 @@ ContainerName=ueransim_docker-ueransim-
 
 for ((i=1;i<=NumberOfGNBInstances;i++));
 do
-   echo "Start $NumberOfUEInstances UE instances"
+   echo "<@ Starting $NumberOfUEInstances UE instances"
    for((j=0; j<NumberOfUEInstances;j+=UEsCreatedAtTheSameTime))
    do
         docker exec $ContainerName$i ./build/nr-ue -c config/ue.yaml -i $UE_IMSI -n $UEsCreatedAtTheSameTime &
@@ -17,4 +17,4 @@ do
         sleep 2
     done
 done
-echo "all UEs started"
+echo "<@ All UEs started"
