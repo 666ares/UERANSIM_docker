@@ -1,16 +1,16 @@
 #!/bin/bash
 
-NumberOfGNBInstances=1
 NumberOfUEInstances=1
-UEsCreatedAtTheSameTime=1
+UEsCreatedAtTheSameTime=2
 UE_IMSI=999251000050009
 ContainerName=ueransim_docker-ueransim-
 
+NumberOfGNBInstances=$(docker ps --format '{{.Names}}' | grep -c "^${ContainerName}")
 
-for ((i=1;i<=NumberOfGNBInstances;i++));
+for (( i=1; i <= NumberOfGNBInstances; i++ ));
 do
-   echo "<@ Starting $NumberOfUEInstances UE instances"
-   for((j=0; j<NumberOfUEInstances;j+=UEsCreatedAtTheSameTime))
+        echo "<@ Starting $NumberOfUEInstances UE instances (with $UEsCreatedAtTheSameTime individual UEs each) on '$ContainerName$i'"
+   for(( j=0; j < NumberOfUEInstances; j++ ))
    do
         docker exec $ContainerName$i ./build/nr-ue -c config/ue.yaml -i $UE_IMSI -n $UEsCreatedAtTheSameTime &
         UE_IMSI=$((UE_IMSI+UEsCreatedAtTheSameTime))
