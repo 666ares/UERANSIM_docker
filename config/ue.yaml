@@ -1,10 +1,7 @@
-# IMSI number of the UE. IMSI = [MCC|MNC|MSISDN] (In total 15 or 16 digits)
-supi: 'imsi-UE_IMSI'
 # Mobile Country Code value
 mcc: 'MCC'
 # Mobile Network Code value (2 or 3 digits)
 mnc: 'MNC'
-
 # Permanent subscription key
 key: 'UE_KEY'
 # Operator code (OP or OPC) of the UE
@@ -13,8 +10,6 @@ op: 'UE_OP'
 opType: 'OPC'
 # Authentication Management Field (AMF) value
 amf: '8000'
-# IMEI number of the device. It is used if no SUPI is provided
-imei: 'UE_IMEI'
 
 # List of gNB IP addresses for Radio Link Simulation
 gnbSearchList:
@@ -36,21 +31,18 @@ uacAcc:
 # Initial PDU sessions to be established
 sessions:
   - type: 'IPv4'
-    apn: 'APN_NAME' #'internet'
+    apn: 'APN_NAME'
     slice:
-      sst: NSSAI_SST #1
-      #sd: NSSAI_SD #000001
+      sst: NSSAI_SST
     emergency: false
 
 # Configured NSSAI for this UE by HPLMN
 configured-nssai:
-  - sst: NSSAI_SST #1
-    #sd: NSSAI_SD #000001
+  - sst: NSSAI_SST
 
 # Default Configured NSSAI for this UE
 default-nssai:
-  - sst: NSSAI_SST #1
-    #sd: NSSAI_SD #000001
+  - sst: NSSAI_SST
 
 # Supported encryption algorithms by this UE
 integrity:
