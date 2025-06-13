@@ -1,8 +1,7 @@
 services:
   ueransim:
-    privileged: true
     build: ./config
-    image: docker_ueransim
+    privileged: true
     stdin_open: true
     tty: true
     volumes:
