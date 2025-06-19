@@ -4,7 +4,7 @@ ue_imsi=999251000050009
 ue_processes=1
 ue_on_each_process=1
 
-container_name=ueransim_docker-ueransim-
+container_name="ueransim_docker-ueransim-"
 gnbs=$(docker ps --format '{{.Names}}' | grep -c "^${container_name}")
 
 for (( i=1; i <= gnbs; i++ )); do

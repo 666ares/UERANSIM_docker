@@ -1,6 +1,6 @@
 #!/bin/bash
 
-container_name=ueransim_docker-ueransim-
+container_name="ueransim_docker-ueransim-"
 gnbs=$(docker ps --format '{{.Names}}' | grep -c "^${container_name}")
 
 for (( i=1; i <= gnbs; i++ )); do
