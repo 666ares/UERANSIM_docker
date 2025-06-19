@@ -1,20 +1,18 @@
 #!/bin/bash
 
-UE_IMSI=999251000050009
+ue_imsi=999251000050009
+ue_processes=1
+ue_on_each_process=1
 
-NumberOfUEInstances=1
-UEsCreatedAtTheSameTime=2
-ContainerName=ueransim_docker-ueransim-
-NumberOfGNBInstances=$(docker ps --format '{{.Names}}' | grep -c "^${ContainerName}")
+container_name=ueransim_docker-ueransim-
+gnbs=$(docker ps --format '{{.Names}}' | grep -c "^${container_name}")
 
-for (( i=1; i <= NumberOfGNBInstances; i++ ));
-do
-    echo "<@ Starting $NumberOfUEInstances UE instances (with $UEsCreatedAtTheSameTime individual UEs each) on '$ContainerName$i'"
-    for (( j=0; j < NumberOfUEInstances; j++ ))
-    do
-        docker exec $ContainerName$i ./build/nr-ue -c config/ue.yaml -i $UE_IMSI -n $UEsCreatedAtTheSameTime &
-        UE_IMSI=$((UE_IMSI+UEsCreatedAtTheSameTime))
-        sleep 2
+for (( i=1; i <= gnbs; i++ )); do
+    echo "<@ Starting $ue_processes 'nr-ue' process(es) with $ue_on_each_process UE(s) per process on '$container_name$i'"
+    for (( j=0; j < ue_processes; j++ )); do
+        docker exec $container_name$i /bin/sh -c "./build/nr-ue -c config/ue.yaml -i $ue_imsi -n $ue_on_each_process &"
+        ue_imsi=$((ue_imsi+ue_on_each_process))
+        sleep 1
     done
 done
 echo "<@ All UEs started"
